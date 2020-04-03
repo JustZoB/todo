@@ -1,0 +1,19 @@
+data () {
+        return {
+            cols: []
+        }
+    },
+    mounted() {
+        if(localStorage.getItem('vuelist')) {
+            console.log("local");
+            try {
+                this.cols = JSON.parse(localStorage.getItem('vuelist'));
+            } catch(e) {
+                localStorage.removeItem('vuelist');
+            }
+        } else {
+            console.log("store");
+            this.cols = this.$store.getters.COLUMNS;
+            localStorage.setItem('vuelist', JSON.stringify(this.cols));
+        }
+    },
